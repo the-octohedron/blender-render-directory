@@ -1,6 +1,10 @@
 <?php
+// USE -r to render directly
 
-$path_to_blender = ""; // for MacOS the following should work (depending on the location of you blender executable) "/Applications/Blender/blender.app/Contents/MacOS/blender"
+// $path_to_blender: leave empty if the blender executable is defined/aliased in your terminal. 
+// Else set the correct path.
+// for MacOS the following should work "/Applications/Blender/blender.app/Contents/MacOS/blender"
+$path_to_blender = ""; 
 
 function extention($filename){
 	if(strrpos($filename, ".")!==false){
@@ -37,6 +41,7 @@ function list_directory($directory, $onlyfiles = false, $onlydirs = false, $fill
 
 
 $files = list_directory(getcwd(),true,false,false,"",'.blend');
+sort($files);
 
 $lastdir = getcwd();
 $lastdir = explode('/', $lastdir);
@@ -50,8 +55,18 @@ foreach($files as $file){
 		$blenderexec = "blender";
 	}
     
-	$string = $blenderexec.' -b '.$file.' -x 1 -a';
-	$out[] = $string;
+	$options = getopt("r::");
+	if(isset($options['r'])){
+		$string = $blenderexec.' -b '.$file.' -x 1 -a';
+		passthru($string);
+	}else{
+		$string = $blenderexec.' -b '.$file.' -x 1 -a';
+		$out[] = $string;
+	}
+	
 }
-
-echo "\n\n"."Copy and paste the following into the terminal and hit enter:"."\n".implode(' && ',$out)."\n\n";
+if(isset($options['r'])){
+	echo "\n\n".count($files)." .blend files rendered";
+}else{
+	echo "\n\n"."Copy and paste the following into the terminal and hit enter:"."\n".implode(' && ',$out)."\n\n";
+}
