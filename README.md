@@ -1,6 +1,6 @@
 # blender-render-directory
 This is a commandline tool, written in PHP for rendering multiple Blender (.blend) files in batch.  
-It searches the directory it resides in for .blend files and starts rendering them in alphabetical order (when using the -r option)
+It searches the directory it resides in for .blend files and starts rendering them in alphabetical order (when using the -r option).  
 Or it returns a string that can be copied into your terminal to start the render. 
 Basically it just rigs the render command for every .blend file together with "&&".  
 
@@ -14,7 +14,8 @@ This way, you can safely go to bed, while all your .blend files are sequentially
 - Blender needs to be accessed through your terminal:
 	- OR define blender in your PATH.  
 	More info can be found in [Blenders manual](https://docs.blender.org/manual/en/latest/advanced/command_line/launch/index.html#command-line-launch-index).  
-	For MacOS just copy this into your terminal: **echo "alias blender='/Applications/Blender/Blender.app/Contents/MacOS/Blender'"  >> \~/.zshrc && source \~/.zshrc**
+	For MacOS just copy this into your terminal:  
+	**echo "alias blender='/Applications/Blender/Blender.app/Contents/MacOS/Blender'"  >> \~/.zshrc && source \~/.zshrc**
 	- OR put the path of the blender executable into the the variable **$path_to_blender** at the top of the **render_current_dir.php** script.
 
 
